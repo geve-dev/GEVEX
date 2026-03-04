@@ -1,0 +1,120 @@
+# Node modules (very large) and package lock files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*.local
+
+# Build output
+dist/
+build/
+out/
+public/build/
+
+# Next/ Nuxt / Gatsby / Vite / Parcel caches and outputs
+.next/
+.nuxt/
+.gutenberg/
+.vercel/
+.parcel-cache/
+.cache/
+.turbo/
+/.vite
+
+# Bundlers
+*.tgz
+*.tar.gz
+*.zip
+*.rar
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.ndjson
+
+# Large media and binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.iso
+*.img
+*.bin
+*.apk
+
+# Video/audio/image/design files (can be huge)
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.flv
+*.mp3
+*.wav
+*.psd
+*.ai
+*.eps
+*.sketch
+
+# IDE / Editor directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Coverage and test output
+coverage/
+.nyc_output/
+test-results/
+
+# Serverless / function build artifacts
+.serverless/
+.firebase/
+.firebase/*
+.awspublish/
+
+# Docker / containers
+docker-compose.override.yml
+Dockerfile
+docker-compose*.yml
+**/docker-compose*.yml
+**/Dockerfile
+
+# Lockfiles for package managers (optional to include or ignore)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Misc
+*.log.*
+coverage/
+reports/
+
+# Local environment override files
+local.env
+secrets.env
+
+# Generated typings/build artifacts
+typings/
+lib/
+es/
+dist-*
+
+# Ignore openssl certs and keys (sensitive)
+*.pem
+*.key
