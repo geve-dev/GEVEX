@@ -18,4 +18,14 @@ async function findById(id) {
   return rows[0];
 }
 
+async function updateUser(id, { name, email, password_hash }) {
+  const setParts  = 
+  [
+    name ? "name = ?" : null,
+    email ? "email = ?" : null,
+    password_hash ? "password_hash = ?" : null
+  ]
+  if setParts.lentgth
+}
+
 module.exports = { findByEmail, createUser, findById };
