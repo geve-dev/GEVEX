@@ -1,6 +1,6 @@
-# social-api
+# GEVEX - Backend de Rede Social
 
-API RESTful que simula o backend de uma rede social simplificada, construída com Node.js, Express e MySQL.
+API RESTful desenvolvida em **Node.js + Express** para simular o backend de uma rede social completa.
 
 ---
 
@@ -29,7 +29,7 @@ API RESTful que simula o backend de uma rede social simplificada, construída co
 ## Estrutura do projeto
 
 ```
-social-api/
+GEVEX/
 ├── src/
 │   ├── routes/          # Definição das rotas da API
 │   ├── controllers/     # Recebem as requisições e delegam para os services
@@ -41,7 +41,7 @@ social-api/
 ├── sql/
 │   └── create_tables.sql
 ├── docs/
-│   └── social-api.postman_collection.json
+│   └── GEVEX.postman_collection.json
 ├── .env.example
 ├── README.md
 └── package.json
@@ -62,7 +62,7 @@ social-api/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/social-api.git
+git clone https://github.com/geve-dev/gevex.git
 cd social-api
 ```
 
@@ -88,7 +88,7 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=sua_senha
-DB_NAME=social_api
+DB_NAME=GEVEX
 JWT_SECRET=seu_segredo_jwt
 JWT_EXPIRES_IN=7d
 ```
