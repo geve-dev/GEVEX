@@ -1,83 +1,250 @@
-# 🚀 GEVEX - Backend de Rede Social
+# social-api
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
-
-**API RESTful** desenvolvida em **Node.js** para simular o backend de uma rede social completa. O projeto permite cadastro de usuários, autenticação segura, criação de postagens, comentários, curtidas e gerenciamento de interações, tudo seguindo uma **arquitetura limpa em camadas**.
+API RESTful que simula o backend de uma rede social simplificada, construída com Node.js, Express e MySQL.
 
 ---
 
-## 📋 Sumário
+## Funcionalidades
 
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Estrutura de Pastas](#-estrutura-de-pastas)
-- [Como Executar o Projeto](#-como-executar-o-projeto)
-- [Endpoints Principais](#-endpoints-principais)
-- [Regras de Negócio](#-regras-de-negócio)
-- [Entregáveis](#-entregáveis)
-- [Status do Projeto](#-status-do-projeto)
+- Cadastro e autenticação de usuários com JWT
+- Criação, listagem, edição e exclusão de posts (com paginação)
+- Comentários por post
+- Curtidas (likes) por post
+- Controle de autorização por recurso (somente o autor pode editar/excluir)
 
 ---
 
-## 📝 Sobre o Projeto
+## Tecnologias utilizadas
 
-O **GEVEX** é um backend completo para uma rede social simplificada, desenvolvido com foco em boas práticas de desenvolvimento. Ele gerencia todo o fluxo de usuários, conteúdos e interações sociais, com ênfase em **segurança**, **escalabilidade** e **manutenibilidade**.
-
-Ideal para demonstração de conhecimentos em APIs REST, autenticação JWT e arquitetura em camadas.
-
-**Projeto desenvolvido para fins acadêmicos — SENAI.**
-
----
-
-## ✨ Funcionalidades
-
-### Usuários
-- Cadastro de novos usuários
-- Login com geração de token JWT
-- Visualização e atualização de perfil (apenas o próprio)
-
-### Postagens
-- Criação, edição e exclusão de posts (apenas pelo autor)
-- Listagem paginada de posts
-- Visualização de post individual
-
-### Interações
-- Adicionar e remover comentários
-- Curtir e descurtir posts (máximo 1 curtida por usuário por post)
-- Listagem de comentários por post
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [MySQL](https://www.mysql.com/)
+- [JWT (jsonwebtoken)](https://github.com/auth0/node-jsonwebtoken)
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+- [Joi](https://joi.dev/) ou [express-validator](https://express-validator.github.io/)
+- [dotenv](https://github.com/motdotla/dotenv)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Estrutura do projeto
 
-- **Runtime:** [Node.js](https://nodejs.org/)
-- **Framework:** [Express.js](https://expressjs.com/)
-- **Banco de Dados:** [MySQL](https://www.mysql.com/)
-- **Autenticação:** JWT + bcrypt para hash de senhas
-- **Validação:** Joi ou express-validator
-- **Gerenciamento de ambiente:** dotenv (variáveis de ambiente)
-- **Arquitetura:** Camadas (Routes → Controllers → Services → Repositories)
-
----
-
-## 📂 Estrutura de Pastas
-
-```text
+```
 social-api/
 ├── src/
-│   ├── routes/          # Definição dos endpoints
-│   ├── controllers/     # Controle de requisições e respostas
-│   ├── services/        # Regras de negócio e lógica principal
-│   ├── repositories/    # Camada de acesso ao banco de dados
-│   ├── middlewares/     # Autenticação, erros e validações
-│   ├── validations/     # Schemas de validação
-│   └── config/          # Configurações (DB, JWT, etc.)
-├── sql/                 # Scripts SQL de criação das tabelas
-├── docs/                # Coleções Postman / Insomnia
-├── .env.example         # Exemplo de variáveis de ambiente
+│   ├── routes/          # Definição das rotas da API
+│   ├── controllers/     # Recebem as requisições e delegam para os services
+│   ├── services/        # Regras de negócio
+│   ├── repositories/    # Acesso ao banco de dados
+│   ├── middlewares/     # Autenticação, tratamento de erros, etc.
+│   ├── validations/     # Schemas de validação de dados
+│   └── config/          # Configuração do banco de dados e variáveis de ambiente
+├── sql/
+│   └── create_tables.sql
+├── docs/
+│   └── social-api.postman_collection.json
+├── .env.example
 ├── README.md
 └── package.json
+```
+
+---
+
+## Pré-requisitos
+
+- Node.js v18+
+- MySQL 8+
+- npm ou yarn
+
+---
+
+## Como executar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/social-api.git
+cd social-api
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Copie o arquivo de exemplo e preencha com as suas configurações:
+
+```bash
+cp .env.example .env
+```
+
+Edite o arquivo `.env`:
+
+```env
+PORT=3000
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_NAME=social_api
+JWT_SECRET=seu_segredo_jwt
+JWT_EXPIRES_IN=7d
+```
+
+### 4. Crie o banco de dados e as tabelas
+
+Acesse seu cliente MySQL e execute:
+
+```bash
+mysql -u root -p < sql/create_tables.sql
+```
+
+Ou importe o arquivo `sql/create_tables.sql` manualmente pela sua ferramenta de preferência (DBeaver, MySQL Workbench, etc.).
+
+### 5. Inicie o servidor
+
+```bash
+# Desenvolvimento (com nodemon)
+npm run dev
+
+# Produção
+npm start
+```
+
+O servidor estará disponível em `http://localhost:3000`.
+
+---
+
+## Endpoints da API
+
+### Usuários
+
+| Método | Rota            | Descrição                         | Auth |
+|--------|-----------------|-----------------------------------|------|
+| POST   | /users          | Cadastro de usuário               | Não  |
+| POST   | /users/login    | Login e geração de token JWT      | Não  |
+| GET    | /users/:id      | Visualização de perfil            | Sim  |
+| PUT    | /users/:id      | Atualização do próprio perfil     | Sim  |
+
+### Posts
+
+| Método | Rota                  | Descrição                          | Auth |
+|--------|-----------------------|------------------------------------|------|
+| POST   | /posts                | Criar post                         | Sim  |
+| GET    | /posts?page=&limit=   | Listar posts com paginação         | Sim  |
+| GET    | /posts/:id            | Visualizar post específico         | Sim  |
+| PUT    | /posts/:id            | Editar post (somente autor)        | Sim  |
+| DELETE | /posts/:id            | Excluir post (somente autor)       | Sim  |
+
+### Comentários
+
+| Método | Rota                    | Descrição                              | Auth |
+|--------|-------------------------|----------------------------------------|------|
+| POST   | /posts/:id/comments     | Adicionar comentário ao post           | Sim  |
+| GET    | /posts/:id/comments     | Listar comentários de um post          | Sim  |
+| DELETE | /comments/:id           | Excluir comentário (somente autor)     | Sim  |
+
+### Curtidas
+
+| Método | Rota               | Descrição              | Auth |
+|--------|--------------------|------------------------|------|
+| POST   | /posts/:id/like    | Curtir post            | Sim  |
+| DELETE | /posts/:id/like    | Remover curtida        | Sim  |
+
+> **Autenticação:** envie o token JWT no header `Authorization: Bearer <token>`.
+
+---
+
+## Exemplos de requisição
+
+### Cadastro de usuário
+
+```http
+POST /users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "password": "senha123"
+}
+```
+
+### Login
+
+```http
+POST /users/login
+Content-Type: application/json
+
+{
+  "email": "joao@email.com",
+  "password": "senha123"
+}
+```
+
+**Resposta:**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Criar post
+
+```http
+POST /posts
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "title": "Meu primeiro post",
+  "content": "Conteúdo do post aqui."
+}
+```
+
+### Listar posts com paginação
+
+```http
+GET /posts?page=1&limit=10
+Authorization: Bearer <token>
+```
+
+---
+
+## Coleção Postman / Insomnia
+
+Importe o arquivo localizado em `docs/social-api.postman_collection.json` no Postman ou Insomnia para testar todos os endpoints com exemplos prontos.
+
+---
+
+## Regras de negócio
+
+- O e-mail do usuário deve ser único no sistema.
+- Senhas são armazenadas exclusivamente com hash bcrypt.
+- Usuário só pode editar ou excluir seus próprios dados.
+- Posts e comentários só podem ser editados ou excluídos pelo autor.
+- Um usuário pode curtir um post apenas uma vez.
+- A listagem de posts utiliza paginação obrigatória via query params `page` e `limit`.
+
+---
+
+## Tratamento de erros
+
+Todos os erros são tratados de forma centralizada pelo middleware de erros. Respostas de erro seguem o formato:
+
+```json
+{
+  "error": "Mensagem descritiva do erro"
+}
+```
+
+Códigos HTTP utilizados: `400` (validação), `401` (não autenticado), `403` (não autorizado), `404` (não encontrado), `409` (conflito), `500` (erro interno).
+
+---
+
+## Autor
+
+Desenvolvido como projeto avaliativo da disciplina de Desenvolvimento Web Back-end.
