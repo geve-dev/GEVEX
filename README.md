@@ -1,112 +1,83 @@
 # 🚀 GEVEX - Backend de Rede Social
 
-API RESTful desenvolvida em Node.js para simular o backend de uma rede social. O projeto implementa cadastro de usuários, autenticação, postagens, comentários e curtidas, seguindo uma arquitetura robusta em camadas.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
 
-## 📝 Contexto do Projeto
-Este sistema permite o gerenciamento completo de interações em uma rede social simplificada, respeitando regras rigorosas de autenticação (JWT) e autorização de recursos.
+**API RESTful** desenvolvida em **Node.js** para simular o backend de uma rede social completa. O projeto permite cadastro de usuários, autenticação segura, criação de postagens, comentários, curtidas e gerenciamento de interações, tudo seguindo uma **arquitetura limpa em camadas**.
 
-## 🛠️ Tecnologias e Requisitos Técnicos
-- **Runtime:** Node.js + Express
-- **Banco de Dados:** MySQL
-- **Segurança:** Senhas criptografadas com `bcrypt` e autenticação via `JWT`
-- **Validação:** Joi ou Express-Validator
-- **Ambiente:** Gerenciamento via variáveis de ambiente (`.env`)
-- **Arquitetura:** Separação em camadas (Routes, Controllers, Services, Repositories)
+---
+
+## 📋 Sumário
+
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Estrutura de Pastas](#-estrutura-de-pastas)
+- [Como Executar o Projeto](#-como-executar-o-projeto)
+- [Endpoints Principais](#-endpoints-principais)
+- [Regras de Negócio](#-regras-de-negócio)
+- [Entregáveis](#-entregáveis)
+- [Status do Projeto](#-status-do-projeto)
+
+---
+
+## 📝 Sobre o Projeto
+
+O **GEVEX** é um backend completo para uma rede social simplificada, desenvolvido com foco em boas práticas de desenvolvimento. Ele gerencia todo o fluxo de usuários, conteúdos e interações sociais, com ênfase em **segurança**, **escalabilidade** e **manutenibilidade**.
+
+Ideal para demonstração de conhecimentos em APIs REST, autenticação JWT e arquitetura em camadas.
+
+**Projeto desenvolvido para fins acadêmicos — SENAI.**
+
+---
+
+## ✨ Funcionalidades
+
+### Usuários
+- Cadastro de novos usuários
+- Login com geração de token JWT
+- Visualização e atualização de perfil (apenas o próprio)
+
+### Postagens
+- Criação, edição e exclusão de posts (apenas pelo autor)
+- Listagem paginada de posts
+- Visualização de post individual
+
+### Interações
+- Adicionar e remover comentários
+- Curtir e descurtir posts (máximo 1 curtida por usuário por post)
+- Listagem de comentários por post
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Runtime:** [Node.js](https://nodejs.org/)
+- **Framework:** [Express.js](https://expressjs.com/)
+- **Banco de Dados:** [MySQL](https://www.mysql.com/)
+- **Autenticação:** JWT + bcrypt para hash de senhas
+- **Validação:** Joi ou express-validator
+- **Gerenciamento de ambiente:** dotenv (variáveis de ambiente)
+- **Arquitetura:** Camadas (Routes → Controllers → Services → Repositories)
+
+---
 
 ## 📂 Estrutura de Pastas
+
 ```text
 social-api/
 ├── src/
-│   ├── routes/         # Definição dos endpoints
-│   ├── controllers/    # Orquestração de req/res
-│   ├── services/       # Regras de negócio e lógica
-│   ├── repositories/   # Consultas ao Banco de Dados
-│   ├── middlewares/    # Auth e Erros centralizados
-│   ├── validations/    # Schemas de validação
-│   └── config/         # Configurações de DB e JWT
-├── sql/                # Scripts de criação das tabelas
-├── docs/               # Coleção Postman/Insomnia
-├── .env.example        # Exemplo de variáveis de ambiente
+│   ├── routes/          # Definição dos endpoints
+│   ├── controllers/     # Controle de requisições e respostas
+│   ├── services/        # Regras de negócio e lógica principal
+│   ├── repositories/    # Camada de acesso ao banco de dados
+│   ├── middlewares/     # Autenticação, erros e validações
+│   ├── validations/     # Schemas de validação
+│   └── config/          # Configurações (DB, JWT, etc.)
+├── sql/                 # Scripts SQL de criação das tabelas
+├── docs/                # Coleções Postman / Insomnia
+├── .env.example         # Exemplo de variáveis de ambiente
 ├── README.md
 └── package.json
-```
-⚙️ Como Executar o Projeto
-
-    Instalação:
-    Bash
-
-    npm install
-
-    Banco de Dados:
-
-        Crie o banco no MySQL.
-
-        Execute o script SQL em /sql/ para criar as tabelas necessárias.
-
-    Configuração:
-
-        Renomeie .env.example para .env e preencha suas credenciais.
-
-    Rodar a API:
-    Bash
-
-    npm run dev
-
-📌 Requisitos Funcionais (Endpoints)
-Usuários
-
-    POST /users - Cadastro de usuário (RF01)
-
-    POST /users/login - Login com geração de JWT (RF02)
-
-    GET /users/:id - Visualização de perfil (RF03)
-
-    PUT /users/:id - Atualização do próprio perfil (RF04)
-
-Posts
-
-    POST /posts - Criar post autenticado (RF05)
-
-    GET /posts?page=&limit= - Listagem com paginação (RF06)
-
-    GET /posts/:id - Visualizar post específico (RF07)
-
-    PUT /posts/:id - Editar post (apenas autor) (RF08)
-
-    DELETE /posts/:id - Excluir post (apenas autor) (RF09)
-
-Interações
-
-    POST /posts/:id/comments - Adicionar comentário (RF10)
-
-    GET /posts/:id/comments - Listar comentários do post (RF11)
-
-    DELETE /comments/:id - Excluir comentário (apenas autor) (RF12)
-
-    POST /posts/:id/like - Curtir post (RF13)
-
-    DELETE /posts/:id/like - Remover curtida (RF14)
-
-⚖️ Regras de Negócio
-
-    Unicidade: E-mail deve ser único no sistema.
-
-    Privacidade: Usuário só edita/exclui seus próprios dados.
-
-    Autoria: Posts e comentários só podem ser alterados/removidos por seus respectivos autores.
-
-    Curtidas: Limite de 1 curtida por usuário em cada post.
-
-    Paginação: Obrigatória na listagem de posts.
-
-📦 Entregáveis
-
-    Código-fonte organizado em camadas.
-
-    Arquivo SQL de criação das tabelas.
-
-    Arquivo .env.example.
-
-    Coleção Postman/Insomnia para testes.
-
-Projeto desenvolvido para fins acadêmicos - SENAI.
