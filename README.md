@@ -29,7 +29,7 @@ social-api/
 ├── .env.example        # Exemplo de variáveis de ambiente
 ├── README.md
 └── package.json
-
+´´´´text
 ⚙️ Como Executar o Projeto
 
     Instalação:
